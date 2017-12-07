@@ -19,7 +19,7 @@ int main()
 
 void hide()
 {
-	HWND stealth;
+	HWND stealth; // window handler used to hide the outputted console window
 	AllocConsole();
 	stealth = FindWindowA("ConsoleWindowClass", NULL);
 	ShowWindow(stealth, 0);
