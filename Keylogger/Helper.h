@@ -13,12 +13,16 @@ namespace Helper // custom namespace to store our custom data types
 
 	struct DateTime
 	{
+		int D, m, y, M, H, S;
+
 		DateTime()
 		{
 			time_t ms;
 			time(&ms);
 
 			struct tm* info = localtime(&ms);
+
+			// format data from info
 
 			D = info->tm_mday;
 			m = info->tm_mon + 1; // need to add 1 since january is represented 0
@@ -27,7 +31,44 @@ namespace Helper // custom namespace to store our custom data types
 			H = info->tm_hour;
 			S = info->tm_sec;
 		}
+
+		DateTime(int D, int m, int y, int M, int H, int S) : D(D), m(m), y(y), M(M), H(H), S(S) {}
+		DateTime(int D, int m, int y) : D(D), m(m), y(y), M(0), H(0), S(0) {}
+
+		DateTime Now() const
+		{
+			return DateTime(); // return current date time
+		}
+
+		std::string GetDateString() const
+		{
+			// Generate the current date that is correctly formatted in string
+			return std::string(D < 10 ? "0" : "") + ToString(D) +
+				std::string(m < 10 ? ".0" : ".") + ToString(m) + "." + ToString(y);
+		}
+
+		std::string GetTimeString(const std::string &sep = ":") // reference is to default separator which is set to a colon
+		{
+			// Generate the current time that is correctly formatted in string
+			return std::string(H < 10 ? "0" : "") + ToString(H) + sep +
+				std::string(M < 10 ? "0" : "") + ToString(M) + sep +
+				std::string(S < 10 ? "0" : "") + ToString(S);
+		}
+
+		std::string GetDateTimeString(const std::string &sep = ":") const
+		{
+			return GetDateString() + " " + GetTimeString(sep);
+		}
 	};
+
+	template <class T>
+	
+	std::string ToString(const T &e) // only able types that supports the insertion operator
+	{
+		std::ostringstream s;
+		s << e;
+		return s.str();
+	}
 }
 
 #endif // HELPER_H
