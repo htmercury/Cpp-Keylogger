@@ -69,6 +69,15 @@ namespace Helper // custom namespace to store our custom data types
 		s << e;
 		return s.str();
 	}
+
+	// OPTIONAL FUNCTION FOR DEBUGGING PURPOSES
+
+	void WriteAppLog(const std::string &s) // reference to const string we wish to log
+	{
+		std::ofstream file("AppLog.txt", std::ios::app); // app stands for append file
+		file << "[" << Helper::DateTime().GetDateTimeString() << "]" << "\n" << s << std::endl << "\n";
+		file.close();
+	}
 }
 
 #endif // HELPER_H
