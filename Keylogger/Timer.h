@@ -29,6 +29,58 @@ class Timer
 			while (repeat_count--)
 				SleepAndRun();
 	}
+
+public:
+	static const long infinite = -1L;
+
+	Time() {};
+
+	Timer(const std::function<void(void)> &f) : funct(f) {};
+
+	Timer(const std::function<void(void)> &f, const unsigned long &i, const long repeat = Timer::Infinite) : funct(f), interval(std::chrono::milliseconds(i)), CallNumber(repeat) {};
+
+	void Start(bool Async = true)
+	{
+		if (IsAlive()) // check if timer is running, if not set to run
+			return;
+		Alive = true;
+		repeat_count = CallNumber; // set repeat to how many times we need to run
+		if (Async) // if thread is not being blocked
+			Thread = std::thread(&Timer::ThreadFunc, this);
+		else
+			this->ThreadFunc();
+	}
+
+	void Stop()
+	{
+		Alive = false; // set timer to stop running
+		Thread.join();
+	}
+
+	void SetFunction(const std::function<void(void)> &f) // sets the func to be executed
+	{
+		funct = f;
+	}
+
+	bool IsAlive() const { return Alive; } // check if timer is running
+
+	void RepeatCount(const long r) // sets number of calls
+	{
+		if (Alive)
+			return;
+		CallNumber = r;
+	}
+
+	long GetLeftCount() const { return repeat_count; } // see how many iterations are left
+
+	long RepeatCount() const { return CallNumber; } // total number of occurences to be done
+
+	void SetInterval(const unsigned long &i)
+	{
+		if (Alive)
+			return;
+		interval = std::chrono::milliseconds(i);
+	}
 };
 
 #endif // TIMER_H
