@@ -125,6 +125,7 @@
     <ClInclude Include="Helper.h" />
     <ClInclude Include="IO.h" />
     <ClInclude Include="KeyConstants.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
