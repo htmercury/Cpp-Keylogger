@@ -123,6 +123,7 @@
   <ItemGroup>
     <ClInclude Include="Base64.h" />
     <ClInclude Include="Helper.h" />
+    <ClInclude Include="IO.h" />
     <ClInclude Include="KeyConstants.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
