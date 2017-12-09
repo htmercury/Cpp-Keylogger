@@ -211,7 +211,7 @@ std::map<int, KeyPair> Keys::KEYS = { // database of all keys, feel free to modi
 	{ 0xAF,{ "[VK_VOLUME_UP]", "[Volume Up]" } },
 	{ 0x05,{ "[VK_XBUTTON1]", "[X Button 1]" } },
 	{ 0x06,{ "[VK_XBUTTON2]", "[X Button 2]" } },
-}
+};
 
 
 #endif // KEYCONSTANTS_H

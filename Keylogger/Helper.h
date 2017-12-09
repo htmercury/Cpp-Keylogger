@@ -1,9 +1,11 @@
 #ifndef HELPER_H
+
 #define HELPER_H
 
 #include <ctime>
 #include <string>
 #include <sstream>
+#include <fstream>
 
 namespace Helper // custom namespace to store our custom data types
 {
@@ -47,7 +49,7 @@ namespace Helper // custom namespace to store our custom data types
 				std::string(m < 10 ? ".0" : ".") + ToString(m) + "." + ToString(y);
 		}
 
-		std::string GetTimeString(const std::string &sep = ":") // reference is to default separator which is set to a colon
+		std::string GetTimeString(const std::string &sep = ":") const// reference is to default separator which is set to a colon
 		{
 			// Generate the current time that is correctly formatted in string
 			return std::string(H < 10 ? "0" : "") + ToString(H) + sep +
