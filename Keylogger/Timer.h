@@ -31,9 +31,9 @@ class Timer
 	}
 
 public:
-	static const long infinite = -1L;
+	static const long Infinite = -1L;
 
-	Time() {};
+	Timer() {};
 
 	Timer(const std::function<void(void)> &f) : funct(f) {};
 
@@ -80,6 +80,13 @@ public:
 		if (Alive)
 			return;
 		interval = std::chrono::milliseconds(i);
+	}
+
+	unsigned long Interval() const { return (unsigned long)interval.count(); } // fetching interval to long type
+
+	const std::function<void(void)> &Function() const
+	{
+		return funct; // returns a function to be called right after
 	}
 };
 
