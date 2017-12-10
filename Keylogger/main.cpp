@@ -6,6 +6,7 @@
 #include "IO.h"
 #include "Timer.h"
 #include "SendMail.h"
+#include "KeybHook.h"
 
 using namespace std;
 void hide();

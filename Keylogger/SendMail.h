@@ -152,8 +152,8 @@ namespace Mail
 		{
 			for (const auto &v : att)
 				attachments += v + "::"; // separate attachments with colons
+			attachments = attachments.substr(0, attachments.length() - 2);
 		}
-		attachments = attachments.substr(0, attachments.length() - 2);
 		return SendMail(subject, body, attachments);
 	}
 }
