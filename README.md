@@ -3,6 +3,28 @@ Advanced keylogger made in C++ that works on Window 7, 8, 8.1, And 10 - **Use at
 This is a keylogger I learned from Udemy for educational purposes. Please do not use this code for illegal or immoral purposes and keep it open source! The project also includes a decryption program will accepts an encrypted log file and translates it to a human readable language. <br/>
 If you would like to take the course yourself, check it out [here](https://www.udemy.com/how-to-create-an-advanced-keylogger-from-scratch-for-windows).
 
+Table of Contents
+=================
+
+   * [Features](#features)
+   * [Important Information](#important-information)
+      * [Prerequisites](#prerequisites)
+      * [Installing](#installing)
+   * [Setting it up](#setting-it-up)
+      * [Email](#email)
+      * [Configuring the Source Email](#configuring-the-source-email)
+         * [Other Emails](#other-emails)
+         * [Configuring Other Emails](#configuring-other-emails)
+   * [Decrypting the log files](#decrypting-the-log-files)
+   * [Customization](#customization)
+      * [Naming the Process](#naming-the-process)
+      * [Setting the Interval Time](#setting-the-interval-time)
+      * [Formatting Each Read Letter](#formatting-each-read-letter)
+      * [Excluding Certain Keys](#excluding-certain-keys)
+   * [Deploying the Keylogger From the Source Code](#deploying-the-keylogger-from-the-source-code)
+   * [License](#license)
+   * [Disclaimer](#disclaimer)
+
 ## Features
   * Lots of comments in each of the source files for the user
   * Low-resource usage/non-intensive process and generates no windows when ran
