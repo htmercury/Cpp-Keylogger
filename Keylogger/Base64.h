@@ -24,7 +24,7 @@ namespace Base64
 		s.insert(7, SALT3);
 		s += SALT1;
 		s = base64_encode(s);
-		s += SALT2 + SALT3 + SALT1;
+		s = SALT2 + SALT3 + s + SALT1;
 		s = base64_encode(s);
 		s.insert(1, "Ls");
 		s.insert(7, "A");
