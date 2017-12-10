@@ -221,4 +221,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 Any usage of this keylogger on a computer that is not owned by you or do not have permissions, **YOU ARE RESPONSIBLE FOR THE OUTCOME**. Not me.
 
 ## Acknowledgments
-Hat tip to Ermin's amazing course on creating a keylogger, check out his profile and other courses (here!)[https://www.udemy.com/user/erminkreponic/]
+Hat tip to Ermin's amazing course on creating a keylogger, check out his profile and other courses [here!](https://www.udemy.com/user/erminkreponic/)
