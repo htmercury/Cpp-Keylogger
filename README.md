@@ -18,6 +18,12 @@ If you would like to take the course yourself, check it out [here](https://www.u
     * When to enable and disable the keyboard hooks
     * Method of encryption used
     * Format which the keys are recorded
+    
+## Important Information
+  * Log files by default are stored in C:\Users\($User)\AppData\Roaming\Microsoft\CLR
+  * AppLog files are produced in the location when the keylogger is ran for debugging purposes
+  * Problems may occur if the Keylogger in ran multiple times when one is still running
+  * Default name to look for in the task manager to end the keylogger is Keylogger.exe
 
 ### Prerequisites
 
@@ -75,7 +81,7 @@ line 18: X_EM_PASS "password" // change the string to password of source email
 ```
 ## Configuring the Source Email
 For gmail, allow less secure apps access your source email so the program can construct and send the email.
-The steps needed to do this is documented [here](https://support.google.com/accounts/answer/6010255?hl=en) on google support. <br/>
+The steps needed to do this is documented [here](https://support.google.com/accounts/answer/6010255?hl=en) on Google Support. <br/>
 Refer to Other Emails section if the source email is not gmail.
 
 **SKIP OTHER EMAILS SECTION IF SOURCE EMAIL IS GMAIL**
