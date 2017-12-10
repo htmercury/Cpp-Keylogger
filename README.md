@@ -124,7 +124,7 @@ Run the decryption program which takes in a input file and a output file which c
 ## Customization
 OPTIONAL changes the user can make to the source code to fit their needs.
 
-## Name
+## Naming the Process
 The name of the process can simply be changed by renaming the .exe file of the built solution
 
 Build the solution
@@ -134,7 +134,7 @@ The .exe file should be located by default in ..\Cpp-Keylogger\Debug\Keylogger.e
 ```
 Rename the built Keylogger.exe file
 
-## Time
+## Setting the Interval Time
 Here, the user can set the interval at which each log file is created and sent
 
 Open KeybHook.h
@@ -145,7 +145,7 @@ Edit line 36 with the desired time (default is 30 seconds)
 ```
 line 36: Timer MailTimer(TimerSendMail, 500 * 60, Timer::Infinite); // change the second argument to desired time (milliseconds)
 ```
-## Format
+## Formatting Each Read Letter
 Here, the user can set how the log file formats the read keys
 
 Open Helper.h
@@ -157,7 +157,7 @@ Edit lines 77 - 83 to change how single keys are formated
 line 77: void WriteAppLog(const std::string &s) // function responsible for format of each key in log (default: [a][b][c])
 ```
 
-## Key Exceptions
+## Excluding Certain Keys
 Here, the user can exclude keys they don't want to be logged
 
 Open KeybHook.h
